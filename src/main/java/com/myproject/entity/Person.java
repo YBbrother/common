@@ -1,8 +1,11 @@
 package com.myproject.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Person {
+public class Person implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private int id;
 	private String name;

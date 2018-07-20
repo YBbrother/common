@@ -4,4 +4,8 @@
 	<select id="selectAllPerson" resultType="Person">
 		select * from person
 	</select>
+	
+	<insert id="insertPerson" parameterType="Person">
+		insert into person values(null, #{name}, #{sex}, #{description}, #{createDate})
+	</insert>
 </mapper>

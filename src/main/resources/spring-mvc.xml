@@ -12,10 +12,9 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd ">
 
 	<!-- 自动扫描包时，在spring-mvc的配置文件中只扫描Controller，不扫描Service -->
-	<context:component-scan base-package="com.myproject" use-default-filters="false">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
-	</context:component-scan>
+	<context:component-scan base-package="com.myproject.controller" />
+	
+	<mvc:annotation-driven  />
 	
 	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
 	<bean id="mappingJacksonHttpMessageConverter"
@@ -40,10 +39,11 @@
   	</bean>
 
 	<!-- 视图解析器 -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="cache" value="true" />
 		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
 	</bean>
 
 </beans>

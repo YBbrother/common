@@ -9,7 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myproject.entity.Friend;
+import com.myproject.entity.Hobby;
 import com.myproject.entity.Person;
+import com.myproject.service.FriendService;
+import com.myproject.service.HobbyService;
 import com.myproject.service.PersonService;
 
 @Controller
@@ -19,9 +23,13 @@ public class PersonController {
 	
 	@Autowired 
 	public PersonService personService;
+	@Autowired 
+	public FriendService friendService;
+	@Autowired 
+	public HobbyService hobbyService;
 	
 	@RequestMapping("test")
-	public ModelAndView test() {
+	public ModelAndView test() throws Exception {
 		logger.info("生与死，轮回不止，我们生，他们死");
 		logger.error("fhwiofwofhwofho");
 		ModelAndView mav = new ModelAndView();
@@ -46,5 +54,31 @@ public class PersonController {
 		}
 		logger.info("******************************测试数据结束******************************");
 	}
-
+	
+	@RequestMapping("transa")
+	public void Transact() {
+		try {
+			Person person = new Person();
+			person.setName("Jace");
+			person.setDescription("handsome");
+			
+			Friend friend = new Friend();
+			friend.setFname("Lucy");
+			friend.setFsex(1);
+			
+			Hobby hobby = new Hobby();
+			hobby.setHname("badminton");
+			hobby.setHplace("sport");
+			
+			personService.insertPerson(person);
+			friendService.insertFriend(friend);
+			hobbyService.insertHobby(hobby);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+		
+	}
+	
 }
