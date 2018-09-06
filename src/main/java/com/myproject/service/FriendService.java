@@ -1,6 +1,6 @@
 package com.myproject.service;
 
-import com.myproject.entity.Friend;
+import com.myproject.model.Friend;
 
 public interface FriendService {
 	

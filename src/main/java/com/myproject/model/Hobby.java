@@ -1,4 +1,4 @@
-package com.myproject.entity;
+package com.myproject.model;
 
 public class Hobby {
 	

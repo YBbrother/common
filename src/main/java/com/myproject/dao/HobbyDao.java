@@ -1,6 +1,6 @@
 package com.myproject.dao;
 
-import com.myproject.entity.Hobby;
+import com.myproject.model.Hobby;
 
 public interface HobbyDao {
 

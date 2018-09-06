@@ -21,7 +21,7 @@ import org.activiti.engine.task.Task;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
-import com.myproject.entity.Person;
+import com.myproject.model.Person;
 
 public class LeaveProcessTest1 {
 	

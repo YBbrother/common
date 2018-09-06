@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myproject.dao.FriendDao;
-import com.myproject.entity.Friend;
+import com.myproject.model.Friend;
 import com.myproject.service.FriendService;
 
 @Service("FriendService")

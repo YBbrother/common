@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myproject.dao.HobbyDao;
-import com.myproject.entity.Hobby;
+import com.myproject.model.Hobby;
 import com.myproject.service.HobbyService;
 
 @Service("HobbyService")

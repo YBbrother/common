@@ -9,17 +9,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myproject.entity.Friend;
-import com.myproject.entity.Hobby;
-import com.myproject.entity.Person;
+import com.myproject.model.Friend;
+import com.myproject.model.Hobby;
+import com.myproject.model.Person;
 import com.myproject.service.FriendService;
 import com.myproject.service.HobbyService;
 import com.myproject.service.PersonService;
+import com.myproject.service.TimeJob;
 
 @Controller
 @RequestMapping("sun")
 public class PersonController {
-	private static final Logger logger = LoggerFactory.getLogger(PersonController.class);
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired 
 	public PersonService personService;
@@ -27,11 +28,14 @@ public class PersonController {
 	public FriendService friendService;
 	@Autowired 
 	public HobbyService hobbyService;
+	@Autowired 
+	public TimeJob timeJob;
 	
 	@RequestMapping("test")
 	public ModelAndView test() throws Exception {
 		logger.info("生与死，轮回不止，我们生，他们死");
 		logger.error("fhwiofwofhwofho");
+		timeJob.aTask();
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("show");
 		return mav;

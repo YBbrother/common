@@ -1,6 +1,6 @@
 package com.myproject.service;
 
-import com.myproject.entity.Hobby;
+import com.myproject.model.Hobby;
 
 public interface HobbyService {
 	
