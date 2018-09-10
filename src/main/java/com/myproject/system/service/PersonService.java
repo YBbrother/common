@@ -1,12 +1,11 @@
-package com.myproject.dao;
+package com.myproject.system.service;
 
 import java.util.List;
 
-import com.myproject.model.Person;
+import com.myproject.system.model.Person;
 
-public interface PersonDao {
+public interface PersonService {
 	
 	public List<Person> selectAllPerson();
 	public void insertPerson(Person person);
-	
 }

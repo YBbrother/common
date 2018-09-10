@@ -1,4 +1,4 @@
-package com.myproject.controller;
+package com.myproject.system.controller;
 
 import java.util.List;
 
@@ -9,13 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myproject.model.Friend;
-import com.myproject.model.Hobby;
-import com.myproject.model.Person;
-import com.myproject.service.FriendService;
-import com.myproject.service.HobbyService;
-import com.myproject.service.PersonService;
-import com.myproject.service.TimeJob;
+import com.myproject.system.model.Friend;
+import com.myproject.system.model.Hobby;
+import com.myproject.system.model.Person;
+import com.myproject.system.service.FriendService;
+import com.myproject.system.service.HobbyService;
+import com.myproject.system.service.PersonService;
+import com.myproject.system.service.TimeJob;
 
 @Controller
 @RequestMapping("sun")

@@ -1,10 +1,10 @@
-package com.myproject.service;
+package com.myproject.system.service;
 
 import java.util.List;
 
 import org.quartz.SchedulerException;
 
-import com.myproject.model.ScheduleJob;
+import com.myproject.system.model.ScheduleJob;
 
 public interface JobTaskService {
 	

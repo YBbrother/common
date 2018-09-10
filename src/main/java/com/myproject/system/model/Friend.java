@@ -1,4 +1,4 @@
-package com.myproject.model;
+package com.myproject.system.model;
 
 public class Friend {
 	

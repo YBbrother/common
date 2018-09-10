@@ -41,11 +41,11 @@
 			<version>1.0</version>
 		</dependency>
 
-		<!-- 用c3p0连接数据库开始 -->
+		<!-- 用druid连接数据库开始 -->
 		<dependency>
-			<groupId>com.mchange</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.5.2</version>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.1.10</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -62,7 +62,7 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.4.5</version>
 		</dependency>
-		<!-- 还有spring-jdbc,用c3p0连接数据库结束 -->
+		<!--连接数据库结束 -->
 
 		<!-- spring start -->
 		<dependency>

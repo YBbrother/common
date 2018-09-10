@@ -1,4 +1,4 @@
-package com.myproject.service.impl;
+package com.myproject.system.service.impl;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -7,7 +7,7 @@ import java.util.Date;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.myproject.service.TimeJob;
+import com.myproject.system.service.TimeJob;
 
 @Component
 public class TimeJobImpl implements TimeJob {

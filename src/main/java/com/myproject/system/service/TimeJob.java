@@ -1,4 +1,4 @@
-package com.myproject.service;
+package com.myproject.system.service;
 
 public interface TimeJob {
 	public void aTask();

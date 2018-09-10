@@ -1,6 +1,6 @@
-package com.myproject.dao;
+package com.myproject.system.dao;
 
-import com.myproject.model.Friend;
+import com.myproject.system.model.Friend;
 
 public interface FriendDao {
 	

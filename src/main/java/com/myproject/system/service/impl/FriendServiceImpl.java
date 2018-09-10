@@ -1,4 +1,4 @@
-package com.myproject.service.impl;
+package com.myproject.system.service.impl;
 
 import javax.management.RuntimeErrorException;
 
@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myproject.dao.FriendDao;
-import com.myproject.model.Friend;
-import com.myproject.service.FriendService;
+import com.myproject.system.dao.FriendDao;
+import com.myproject.system.model.Friend;
+import com.myproject.system.service.FriendService;
 
 @Service("FriendService")
 @Transactional

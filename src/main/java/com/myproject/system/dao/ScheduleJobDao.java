@@ -1,10 +1,10 @@
-package com.myproject.dao;
+package com.myproject.system.dao;
 
 import java.util.List;
 
 import org.quartz.SchedulerException;
 
-import com.myproject.model.ScheduleJob;
+import com.myproject.system.model.ScheduleJob;
 
 public interface ScheduleJobDao {
 	

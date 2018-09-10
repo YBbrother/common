@@ -3,7 +3,7 @@ package com.myproject.quartz;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import com.myproject.model.ScheduleJob;
+import com.myproject.system.model.ScheduleJob;
 import com.myproject.utils.JobUtils;
 
 /**

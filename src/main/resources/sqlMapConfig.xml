@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     </settings>
 	<!-- 别名 -->
 	<typeAliases>
-		<package name="com.myproject.entity"/>
+		<package name="com.myproject.system.model"/>
 	</typeAliases>
 	
 </configuration>

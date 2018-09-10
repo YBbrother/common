@@ -1,6 +1,6 @@
-package com.myproject.dao;
+package com.myproject.system.dao;
 
-import com.myproject.model.Hobby;
+import com.myproject.system.model.Hobby;
 
 public interface HobbyDao {
 

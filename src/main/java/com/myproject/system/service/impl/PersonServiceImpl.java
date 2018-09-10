@@ -1,4 +1,4 @@
-package com.myproject.service.impl;
+package com.myproject.system.service.impl;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myproject.dao.PersonDao;
-import com.myproject.model.Person;
-import com.myproject.service.PersonService;
+import com.myproject.system.dao.PersonDao;
+import com.myproject.system.model.Person;
+import com.myproject.system.service.PersonService;
 
 @Service("PersonService")
 public class PersonServiceImpl implements PersonService {

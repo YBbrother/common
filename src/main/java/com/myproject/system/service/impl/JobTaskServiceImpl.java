@@ -1,4 +1,4 @@
-package com.myproject.service.impl;
+package com.myproject.system.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +20,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
-import com.myproject.dao.ScheduleJobDao;
-import com.myproject.model.ScheduleJob;
 import com.myproject.quartz.QuartzJobFactory;
 import com.myproject.quartz.QuartzJobFactoryDisallowConcurrentExecution;
-import com.myproject.service.JobTaskService;
+import com.myproject.system.dao.ScheduleJobDao;
+import com.myproject.system.model.ScheduleJob;
+import com.myproject.system.service.JobTaskService;
 import com.myproject.utils.JobUtils;
 
 public class JobTaskServiceImpl implements JobTaskService {
