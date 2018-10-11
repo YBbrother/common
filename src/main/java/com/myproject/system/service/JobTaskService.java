@@ -13,7 +13,7 @@ public interface JobTaskService {
 	 * 
 	 * @return
 	 */
-	List<ScheduleJob> getAllTask();
+	List<ScheduleJob> getAllTask(ScheduleJob job);
 	
 	/**
 	 * 添加Task
@@ -28,7 +28,7 @@ public interface JobTaskService {
 	 * @param jobId
 	 * @return
 	 */
-	ScheduleJob getTaskById(Long jobId);
+	ScheduleJob getTaskById(String jobId);
 	
 	/**
 	 * 更改任务状态
@@ -37,7 +37,7 @@ public interface JobTaskService {
 	 * @param cmd
 	 * @throws SchedulerException
 	 */
-	void changeStatus(Long jobId, String cmd) throws SchedulerException;
+	void changeStatus(String jobId, String cmd) throws SchedulerException;
 	
 	/**
 	 * 更改任务 cron表达式
@@ -46,7 +46,7 @@ public interface JobTaskService {
 	 * @param cron
 	 * @throws SchedulerException
 	 */
-	void updateCron(Long jobId, String cron) throws SchedulerException;
+	void updateCron(String jobId, String cron) throws SchedulerException;
 	
 	/**
 	 * 添加任务
@@ -55,6 +55,21 @@ public interface JobTaskService {
 	 * @throws SchedulerException
 	 */
 	void addJob(ScheduleJob scheduleJob) throws SchedulerException;
+	
+	/**
+	 * 修改任务
+	 * 
+	 * @param scheduleJob
+	 * @throws SchedulerException
+	 */
+	void updateById(ScheduleJob scheduleJob) throws SchedulerException;
+	
+	/**
+	 * 删除任务
+	 * 
+	 * @param scheduleJob
+	 */
+	void deleteJobById(ScheduleJob scheduleJob);
 	
 	/**
 	 * 启动

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myproject.system.dao.ScheduleJobDao">
+
+	<select id="select" parameterType="ScheduleJob" resultType="ScheduleJob">
+		SELECT
+			* 
+		FROM
+			`task_schedule_job`
+	</select>
+	
+	<insert id="addTask" parameterType="ScheduleJob">
+		INSERT INTO `task_schedule_job`
+		VALUES
+			( NULL, now(), #{updateTime}, #{jobName}, #{jobGroup}, #{jobStatus}, #{cronExpression}, #{description}, #{beanClass}, #{isConcurrent}, #{springId}, #{methodName} )
+	</insert>
+	
+	<select id="getTaskById" parameterType="String" resultType="ScheduleJob">
+		SELECT
+			* 
+		FROM
+			`task_schedule_job` 
+		WHERE
+			job_id = #{jobId}
+	</select>
+	
+	<update id="updateById" parameterType="ScheduleJob">
+		UPDATE `task_schedule_job` 
+		SET update_time = now( ),
+		job_name = #{jobName},
+		job_group = #{jobGroup},
+		job_status = #{jobStatus},
+		cron_expression = #{cronExpression},
+		description = #{description},
+		bean_class = #{beanClass},
+		is_concurrent = #{isConcurrent},
+		spring_id = #{springId},
+		method_name = #{methodName} 
+		WHERE
+			job_id = #{jobId}
+	</update>
+	
+	<delete id="deleteJobById" parameterType="ScheduleJob">
+		DELETE 
+		FROM
+			`task_schedule_job` 
+		WHERE
+			job_id = #{jobId}
+	</delete>
+	
+</mapper>

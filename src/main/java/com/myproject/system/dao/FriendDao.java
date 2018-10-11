@@ -4,6 +4,6 @@ import com.myproject.system.model.Friend;
 
 public interface FriendDao {
 	
-	public void insertFriend(Friend friend);
+	void insertFriend(Friend friend);
 	
 }

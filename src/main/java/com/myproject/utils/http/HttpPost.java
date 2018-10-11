@@ -1,4 +1,4 @@
-package com.myproject.http;
+package com.myproject.utils.http;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

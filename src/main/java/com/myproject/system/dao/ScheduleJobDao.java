@@ -12,14 +12,9 @@ public interface ScheduleJobDao {
 	
 	void addTask(ScheduleJob scheduleJob);
 	
-	ScheduleJob getTaskById(Long jobId);
+	ScheduleJob getTaskById(String jobId);
 	
-	void changeStatus(Long jobId, String cmd) throws SchedulerException;
-
-	void updateCron(Long jobId, String cron) throws SchedulerException;
-
-	void addJob(ScheduleJob scheduleJob) throws SchedulerException;
-
 	void updateById(ScheduleJob scheduleJob) throws SchedulerException;
-
+	
+	void deleteJobById(ScheduleJob scheduleJob);
 }

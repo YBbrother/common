@@ -18,7 +18,9 @@ import org.quartz.TriggerKey;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
+import org.springframework.stereotype.Service;
 
 import com.myproject.quartz.QuartzJobFactory;
 import com.myproject.quartz.QuartzJobFactoryDisallowConcurrentExecution;
@@ -27,17 +29,19 @@ import com.myproject.system.model.ScheduleJob;
 import com.myproject.system.service.JobTaskService;
 import com.myproject.utils.JobUtils;
 
+@Service
 public class JobTaskServiceImpl implements JobTaskService {
 	
 	public final Logger logger = LoggerFactory.getLogger(this.getClass()); 
 	
 	private SchedulerFactoryBean schedulerFactoryBean;
 	
+	@Autowired
 	private ScheduleJobDao scheduleJobMapper;
 	
 	@Override
-	public List<ScheduleJob> getAllTask() {
-		return scheduleJobMapper.select(null);
+	public List<ScheduleJob> getAllTask(ScheduleJob job) {
+		return scheduleJobMapper.select(job);
 	}
 
 	@Override
@@ -46,12 +50,12 @@ public class JobTaskServiceImpl implements JobTaskService {
 	}
 
 	@Override
-	public ScheduleJob getTaskById(Long jobId) {
+	public ScheduleJob getTaskById(String jobId) {
 		return scheduleJobMapper.getTaskById(jobId);
 	}
 
 	@Override
-	public void changeStatus(Long jobId, String cmd) throws SchedulerException {
+	public void changeStatus(String jobId, String cmd) throws SchedulerException {
 		ScheduleJob scheduleJob = getTaskById(jobId);
 		if (scheduleJob == null) {
 			return;
@@ -67,7 +71,7 @@ public class JobTaskServiceImpl implements JobTaskService {
 	}
 
 	@Override
-	public void updateCron(Long jobId, String cron) throws SchedulerException {
+	public void updateCron(String jobId, String cron) throws SchedulerException {
 		ScheduleJob scheduleJob = getTaskById(jobId);
 		if (scheduleJob == null) {
 			return;
@@ -199,13 +203,29 @@ public class JobTaskServiceImpl implements JobTaskService {
 
 	@Override
 	public void updateJobCron(ScheduleJob scheduleJob) throws SchedulerException {
-		// TODO Auto-generated method stub
+		Scheduler scheduler = schedulerFactoryBean.getScheduler();
+	    TriggerKey triggerKey = TriggerKey.triggerKey(scheduleJob.getJobName(), scheduleJob.getJobGroup());
+	    CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
+	    CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(scheduleJob.getCronExpression());
+	    trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
+	    scheduler.rescheduleJob(triggerKey, trigger);
 	}
 	
+	public static void main(String[] args) {
+		// 检查cron表达式是否正确
+		CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("5 * * * * ?");
+		System.out.println(scheduleBuilder);
+	}
+
+	@Override
+	public void updateById(ScheduleJob scheduleJob) throws SchedulerException {
+		scheduleJobMapper.updateById(scheduleJob);
+	}
+
+	@Override
+	public void deleteJobById(ScheduleJob scheduleJob) {
+		scheduleJobMapper.deleteJobById(scheduleJob);
+	}
 	
 }
-
-
-
-
 

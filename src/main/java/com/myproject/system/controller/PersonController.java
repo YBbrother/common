@@ -42,21 +42,21 @@ public class PersonController {
 	}
 	
 	@RequestMapping("person")
-	public void testPerson() {
+	public ModelAndView testPerson() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("aa");
 		logger.info("******************************测试数据开始******************************");
 		try {
 			List<Person> allPerson = personService.selectAllPerson();
 			for(Person person : allPerson) {
-				System.out.print(person.getId());
-				System.out.print(person.getName());
-				System.out.print(person.getSex());
-				System.out.print(person.getDescription());
-				System.out.println(person.getCreateDate());
+				System.out.println(person);
 			}
+			mav.addObject("persons", allPerson);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		logger.info("******************************测试数据结束******************************");
+		return mav;
 	}
 	
 	@RequestMapping("transa")

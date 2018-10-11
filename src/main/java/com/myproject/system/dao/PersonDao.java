@@ -6,7 +6,7 @@ import com.myproject.system.model.Person;
 
 public interface PersonDao {
 	
-	public List<Person> selectAllPerson();
-	public void insertPerson(Person person);
+	List<Person> selectAllPerson();
+	void insertPerson(Person person);
 	
 }

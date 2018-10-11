@@ -150,5 +150,13 @@ public class ScheduleJob implements Serializable {
 	public void setMethodName(String methodName) {
 		this.methodName = methodName;
 	}
+
+	@Override
+	public String toString() {
+		return "ScheduleJob [jobId=" + jobId + ", createTime=" + createTime + ", updateTime=" + updateTime
+				+ ", jobName=" + jobName + ", jobGroup=" + jobGroup + ", jobStatus=" + jobStatus + ", cronExpression="
+				+ cronExpression + ", description=" + description + ", beanClass=" + beanClass + ", isConcurrent="
+				+ isConcurrent + ", springId=" + springId + ", methodName=" + methodName + "]";
+	}
     
 }

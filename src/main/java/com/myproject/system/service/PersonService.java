@@ -6,6 +6,6 @@ import com.myproject.system.model.Person;
 
 public interface PersonService {
 	
-	public List<Person> selectAllPerson();
-	public void insertPerson(Person person);
+	List<Person> selectAllPerson();
+	void insertPerson(Person person);
 }
