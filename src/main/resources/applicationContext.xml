@@ -117,5 +117,6 @@
 		pointcut-ref="servicePointcut" /> </aop:config> -->
 
 	<import resource="classpath:activiti.cfg.xml" />
+	<import resource="classpath:spring-quartz.xml" />
 
 </beans>   

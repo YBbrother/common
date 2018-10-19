@@ -27,6 +27,7 @@
 <body>
 	<div>
 		<button onclick="addTask()">增加任务</button>
+		<button onclick="start()">启动</button>
 	</div>
 	
 	<table width="100%" height="100" border="1" cellpadding="0" cellspacing="0">
@@ -102,12 +103,37 @@
 					data : {
 						'jobId' : jobId
 					},
+					dataType: "json",
 					success:function(data) {
 						if (data.code == "success") {
 							layer.msg(data.message, {icon:1,time:500}, function(){ window.parent.location.reload(); });
 							// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
 						} else {
 							layer.msg(data.message, {icon:2,time:500}, function(){ window.parent.location.reload(); });
+						}
+					}
+				});
+			})
+		}
+		
+		function start() {
+			var jobId = '1001';
+			layer.confirm('确定启动吗？', {
+				btn : [ '确定', '取消' ]
+			}, function() {
+				$.ajax({
+					url : prefix + '/startJob.do',
+					type : "post",
+					data : {
+						'jobId' : jobId
+					},
+					dataType: "json",
+					success:function(data) {
+						if (data.code == "success") {
+							layer.msg(data.message, {icon:1,time:500});
+							// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
+						} else {
+							layer.msg(data.message, {icon:2,time:500});
 						}
 					}
 				});

@@ -34,6 +34,7 @@ public class JobTaskServiceImpl implements JobTaskService {
 	
 	public final Logger logger = LoggerFactory.getLogger(this.getClass()); 
 	
+	@Autowired
 	private SchedulerFactoryBean schedulerFactoryBean;
 	
 	@Autowired

@@ -103,5 +103,23 @@ public class QuartzController {
 			logger.error("修改任务出错：" + e.getMessage());
 		}
 	}
+	
+	@RequestMapping("startJob")
+	public void scheduleJob(HttpServletResponse response, ScheduleJob scheduleJob) {
+		JSONObject json = new JSONObject();
+		try {
+			ScheduleJob scheduleJob1 = jobTaskService.getTaskById("1001");
+			//jobTaskService.deleteJob(scheduleJob1);
+			jobTaskService.addJob(scheduleJob1);
+			jobTaskService.runAJobNow(scheduleJob1);
+			json.put("code", "success");
+			json.put("message", "启动成功");
+			WriterUtil.write(response, json.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("修改任务出错：" + e.getMessage());
+		}
+	}
+	
 
 }

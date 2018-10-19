@@ -25,12 +25,13 @@ public class Ha {
 		int lastindex = str.lastIndexOf(key);
 		int len = str.length();
 		
-		while((index=str.indexOf(key))!=-1 && i<count){
+		while((index=sb.indexOf(key))!=-1 && i<count){
 			if(i<=(num-2)){
 				sb.replace(index+length, index+length+2, list.get(i));
-				length += index+(list.get(i).length())-1;
 				i++;
-				str=sb.substring(length);
+				/*length += index+(list.get(i).length())-1;
+				
+				str=sb.substring(length);*/
 			}else{
 				if(lastindex!=(len-1)){
 					sb.replace(index+length, index+length+2,list.get(i));
@@ -46,17 +47,17 @@ public class Ha {
 	
 		public static void main(String[] args) throws IOException {
 			
-			String aa = "a_{}{}{}";
+			String aa = "a_a_{}_{}_b";
 			List<String> list = new ArrayList<>();
-			list.add("a");
-			list.add("");
-			list.add("");
+			list.add("qq");
+			list.add("ww");
+			list.add("ee");
 			
 			StringBuilder replace = replace(aa, list, "{}", 3, 3);
 			
 			System.out.println(replace + "//");
-			String format = StrUtil.format(aa, "a", "", "");
-			System.out.println(format);
+			/*String format = StrUtil.format(aa, "a", "", "");
+			System.out.println(format);*/
 			
 			/*
 			// Create a workbook object

@@ -18,6 +18,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 		<property name="autoStartup" value="true"></property>  
 		<property name="applicationContextSchedulerContextKey" value="applicationContext"></property>
 		<property name="configLocation" value="classpath:quartz.properties"></property>
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
 
 </beans>

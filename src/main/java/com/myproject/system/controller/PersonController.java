@@ -35,7 +35,7 @@ public class PersonController {
 	public ModelAndView test() throws Exception {
 		logger.info("生与死，轮回不止，我们生，他们死");
 		logger.error("fhwiofwofhwofho");
-		timeJob.aTask();
+		timeJob.aTask("KK");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("show");
 		return mav;

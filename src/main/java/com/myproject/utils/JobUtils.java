@@ -50,16 +50,19 @@ public class JobUtils {
 		clazz = object.getClass();
 		Method method = null;
 		try {
-			method = clazz.getMethod(scheduleJob.getMethodName(), new Class[] {JobExecutionContext.class});
+			method = clazz.getMethod(scheduleJob.getMethodName());
+			//method = clazz.getMethod(scheduleJob.getMethodName(), new Class[] {JobExecutionContext.class});
 		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
 			logger.error("任务名称 = [" + scheduleJob.getJobName() + "]---------------未启动成功，方法名设置错误！！！");
 		} catch (SecurityException e) {
 			 e.printStackTrace();
 		}
 		
-		if(method != null) {
+		if (method != null) {
 			try {
-				method.invoke(object, new Object[] {context});
+				method.invoke(object);
+				//method.invoke(object, new Object[] {context});
 			}catch (Exception e) {
 				 e.printStackTrace();
 			}
