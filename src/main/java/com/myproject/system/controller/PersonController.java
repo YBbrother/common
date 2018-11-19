@@ -12,10 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myproject.system.model.Friend;
 import com.myproject.system.model.Hobby;
 import com.myproject.system.model.Person;
-import com.myproject.system.service.FriendService;
-import com.myproject.system.service.HobbyService;
-import com.myproject.system.service.PersonService;
-import com.myproject.system.service.TimeJob;
+import com.myproject.system.service.friendservice.FriendService;
+import com.myproject.system.service.hobbyservice.HobbyService;
+import com.myproject.system.service.personservice.PersonService;
+import com.myproject.system.service.timejob.TimeJob;
 
 @Controller
 @RequestMapping("sun")
@@ -32,10 +32,9 @@ public class PersonController {
 	public TimeJob timeJob;
 	
 	@RequestMapping("test")
-	public ModelAndView test() throws Exception {
+	public ModelAndView test() {
 		logger.info("生与死，轮回不止，我们生，他们死");
 		logger.error("fhwiofwofhwofho");
-		timeJob.aTask("KK");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("show");
 		return mav;

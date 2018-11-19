@@ -2,7 +2,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Job List</title>
 		<style type="text/css">
 			<!--
@@ -16,37 +15,36 @@
 			.STYLE15 {font-family: Arial, Helvetica, sans-serif; font-size: 24px; }
 			-->
 		</style>
-	
-		<!-- <link type="text/css" href="styles/layui.css" rel="stylesheet">
-		<script type="text/javascript" src="scripts/lay/layui.js"></script> -->
-		
-		<script type="text/javascript" src="/common/scripts/jquery/jquery-3.3.1.js"></script>
-		<script type="text/javascript" src="/common/scripts/layer/layer.js"></script>
+		<!-- 引入静态资源文件 -->
+		<#include "common/header.ftl">
 	</head>
  
-<body>
-	<div>
-		<button onclick="addTask()">增加任务</button>
-		<button onclick="start()">启动</button>
-	</div>
+	<body>
+		<div>
+			<button onclick="addTask()">增加任务</button>
+			<button onclick="start()">启动任务</button>
+			<button onclick="deleteJob()">删除任务</button>
+			<button onclick="getAll()">显示所有任务</button>
+			<button onclick="getRuning()">显示已运行任务</button>
+		</div>
 	
-	<table width="100%" height="100" border="1" cellpadding="0" cellspacing="0">
-	      <tr>
-	        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">任务ID</span></td>
-	        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">创建时间</span></td>
-	        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">更新时间</span></td>
-	        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">任务名称</span></td>
-	        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">任务分组</span></td>
-	        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">任务状态</span></td>
-	        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">cron表达式</span></td>
-	        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">描述</span></td>
-	        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">执行Bean</span></td>
-	        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">任务是否有状态</span></td>
-	        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">SpringId</span></td>
-	        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">任务调用方法名</span></td>
-	        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">操作</span></td>
-	      </tr>
-	      <#list taskList as task>
+		<table width="100%" height="100" border="1" cellpadding="0" cellspacing="0">
+	      	<tr>
+		        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">任务ID</span></td>
+		        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">创建时间</span></td>
+		        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">更新时间</span></td>
+		        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">任务名称</span></td>
+		        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">任务分组</span></td>
+		        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">任务状态</span></td>
+		        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">cron表达式</span></td>
+		        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">描述</span></td>
+		        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">执行Bean</span></td>
+		        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">任务是否有状态</span></td>
+		        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">SpringId</span></td>
+		        <td width="160" height="10" align="center" valign="middle"><span class="STYLE15">任务调用方法名</span></td>
+	        	<td width="160" height="10" align="center" valign="middle"><span class="STYLE15">操作</span></td>
+	      	</tr>
+	      	<#list taskList as task>
 	      	<tr>
 	      		<td align="center">${task.jobId}</td>
 	      		<td align="center">${task.createTime}</td>
@@ -127,6 +125,72 @@
 					data : {
 						'jobId' : jobId
 					},
+					dataType: "json",
+					success:function(data) {
+						if (data.code == "success") {
+							layer.msg(data.message, {icon:1,time:500});
+							// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
+						} else {
+							layer.msg(data.message, {icon:2,time:500});
+						}
+					}
+				});
+			})
+		}
+		
+		function deleteJob() {
+			var jobId = '1001';
+			layer.confirm('确定删除吗？', {
+				btn : [ '确定', '取消' ]
+			}, function() {
+				$.ajax({
+					url : prefix + '/jobDelete.do',
+					type : "post",
+					data : {
+						'jobId' : jobId
+					},
+					dataType: "json",
+					success:function(data) {
+						if (data.code == "success") {
+							layer.msg(data.message, {icon:1,time:500});
+							// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
+						} else {
+							layer.msg(data.message, {icon:2,time:500});
+						}
+					}
+				});
+			})
+		}
+		
+		function getAll() {
+			var jobId = '1001';
+			layer.confirm('确定启动吗？', {
+				btn : [ '确定', '取消' ]
+			}, function() {
+				$.ajax({
+					url : prefix + '/jobAll.do',
+					type : "post",
+					dataType: "json",
+					success:function(data) {
+						if (data.code == "success") {
+							layer.msg(data.message, {icon:1,time:500});
+							// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
+						} else {
+							layer.msg(data.message, {icon:2,time:500});
+						}
+					}
+				});
+			})
+		}
+		
+		function getRuning() {
+			var jobId = '1001';
+			layer.confirm('确定启动吗？', {
+				btn : [ '确定', '取消' ]
+			}, function() {
+				$.ajax({
+					url : prefix + '/running.do',
+					type : "post",
 					dataType: "json",
 					success:function(data) {
 						if (data.code == "success") {

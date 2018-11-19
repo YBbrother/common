@@ -4,6 +4,7 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:cache="http://www.springframework.org/schema/cache"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans.xsd 
@@ -16,22 +17,14 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/task
-        http://www.springframework.org/schema/task/spring-task.xsd">
+        http://www.springframework.org/schema/task/spring-task.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-	<!-- 自动扫描包时，在applicationContext.xml的配置文件中只扫描Service，不扫描Controller ，让Service早于Controller被扫描，防止事务不生效 -->
-	<!-- <context:component-scan base-package="com.myproject" /> -->
-	<!-- <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/> 
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/> -->
-
-	<!-- <context:component-scan base-package="com.myproject"> <context:exclude-filter 
-		type="annotation" expression="org.springframework.stereotype.Controller" 
-		/> </context:component-scan> -->
 
 	<context:component-scan base-package="com.myproject" />
 
 	<context:property-placeholder location="classpath:jdbc.properties" />
-	<!-- <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
-		<property name="location" value="classpath:jdbc.properties" /> </bean> -->
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
@@ -79,17 +72,27 @@
 		<property name="basePackage" value="com.myproject.system.dao"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
+	
+	<!-- ehcache缓存配置 -->
+	<!-- 启用缓存注解，以cache开头 -->
+	<cache:annotation-driven cache-manager="cacheManager"/>
+	
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="ehcache"></property>
+	</bean>
+	
+	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml"></property>
+	</bean>
 
 	<task:scheduler id="schedulerJob" pool-size="5" />
 
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 
-	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
 	<tx:annotation-driven />
-
+	
 	<tx:advice id="txAdvice">
 		<tx:attributes>
 			<!-- 约定优于编码 设置事务详情 -->
@@ -106,15 +109,9 @@
 
 	<aop:config>
 		<aop:advisor advice-ref="txAdvice"
-			pointcut="execution(* com.myproject.service..*.*(..))" />
+			pointcut="execution(* com.myproject.system.service..*.*(..))" />
 	</aop:config>
 
-
-	<!-- <tx:advice id="txadvice" transaction-manager="transactionManager"> 
-		<tx:attributes> <tx:method name="insert*" propagation="REQUIRED"></tx:method> 
-		</tx:attributes> </tx:advice> <aop:config> <aop:pointcut expression="execution(* 
-		com.myproject.service..*.*(..))" id="servicePointcut"/> <aop:advisor advice-ref="txadvice" 
-		pointcut-ref="servicePointcut" /> </aop:config> -->
 
 	<import resource="classpath:activiti.cfg.xml" />
 	<import resource="classpath:spring-quartz.xml" />

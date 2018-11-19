@@ -10,6 +10,10 @@ import com.xiaoleilu.hutool.util.StrUtil;
 
 public class Multi {
 	public static void main(String[] args) throws Exception {
+		
+		/*String prop = System.getProperty("java.io.tmpdir");
+		System.out.println(prop);*/
+		System.out.println("".length());
 		/*String s1 = "已经习惯了回车和换行一次搞定\r，敲一个回车键，即是回";
 		System.out.print(s1);*/
 		
@@ -94,16 +98,16 @@ public class Multi {
 		/*String redisModel = "msg_key_{}_{}_{}_{}";
 		redisModel = redisModel.substring(0, redisModel.lastIndexOf("_{}"));
 		System.out.println(redisModel);		*/
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	/*	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		GregorianCalendar gcDateStart = new GregorianCalendar();
 		gcDateStart.setTime(new Date());
 		System.out.println(sdf.format(gcDateStart.getTime()));
 		Date ff = sdf.parse("2018-09-26 11:00:00");
-		System.out.println(ff);
+		System.out.println(ff);*/
 	}
 	
 	// "", null, aa, aa{}{}{}, aa_{}_{}, aa{}, aa_{}_{}_{}_{}_{}_{} 2个参数,  aa_{}_jj
-	public static String getKey(String redisModel, List<String> list) {
+/*	public static String getKey(String redisModel, List<String> list) {
 		String key = "";
 		if (redisModel == null || "".equals(redisModel) || !redisModel.contains("{}")) {
 			key = redisModel;
@@ -121,7 +125,7 @@ public class Multi {
 			}
 		}
 		return key;
-	}
+	}*/
 	
 	
 /*	public static StringBuffer aa(String... ff) {

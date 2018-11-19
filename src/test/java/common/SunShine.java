@@ -8,13 +8,17 @@ import sun.misc.BASE64Encoder;
 
 public class SunShine {
 	public static void main(String[] args) {
-		int i = 876543;
+		/*int i = 876543;
 		Integer ss = 876543;
 		System.out.println(i == ss);
 		Integer var = 888;
-		System.out.println(var.equals(888));
-		
+		System.out.println(var.equals(888));*/
 		//arr();
+		
+		String productNames = "fwi,jfewo,jiw,";
+		String s = productNames.substring(0, productNames.length() - 1);
+		System.out.println(productNames);
+		System.out.println(s);
 	}
 	
 	public static void arr() {

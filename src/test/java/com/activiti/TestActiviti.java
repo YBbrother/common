@@ -11,9 +11,9 @@ public class TestActiviti {
 	public void createTableByCode() {
 		ProcessEngineConfiguration processEngineConfiguration = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration();
 		processEngineConfiguration.setJdbcDriver("com.mysql.jdbc.Driver");
-		processEngineConfiguration.setJdbcUrl("jdbc:mysql://139.224.232.120:3306/activitidb?useUnicode=true&characterEncoding=UTF8");
-		processEngineConfiguration.setJdbcUsername("root");
-		processEngineConfiguration.setJdbcPassword("123456");
+		processEngineConfiguration.setJdbcUrl("");
+		processEngineConfiguration.setJdbcUsername("");
+		processEngineConfiguration.setJdbcPassword("");
 		processEngineConfiguration.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
 		ProcessEngine processEngine = processEngineConfiguration.buildProcessEngine();
 		System.out.println(processEngine);

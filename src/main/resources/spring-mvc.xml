@@ -104,6 +104,8 @@
 		<property name="exposeRequestAttributes" value="true" />
 		<property name="exposeSessionAttributes" value="true" />
 		<property name="exposeSpringMacroHelpers" value="true" />
+		<!-- 可以在页面用${rc.contextPath}获取项目名 -->
+		<property name="requestContextAttribute" value="rc"></property>
 	</bean>
 
 	<!-- 配置jsp视图解析器 -->

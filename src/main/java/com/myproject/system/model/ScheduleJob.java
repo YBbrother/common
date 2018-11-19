@@ -41,7 +41,7 @@ public class ScheduleJob implements Serializable {
     private String beanClass;
     
     /**
-     * 任务是否有状态
+     * 任务是否有状态    需要把值设成false
      */
     private String isConcurrent;
     

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.quartz.SchedulerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.myproject.system.model.ScheduleJob;
-import com.myproject.system.service.JobTaskService;
+import com.myproject.system.service.jobtaskservice.JobTaskService;
 import com.myproject.utils.WriterUtil;
 
 import net.sf.json.JSONObject;
@@ -109,7 +110,6 @@ public class QuartzController {
 		JSONObject json = new JSONObject();
 		try {
 			ScheduleJob scheduleJob1 = jobTaskService.getTaskById("1001");
-			//jobTaskService.deleteJob(scheduleJob1);
 			jobTaskService.addJob(scheduleJob1);
 			jobTaskService.runAJobNow(scheduleJob1);
 			json.put("code", "success");
@@ -121,5 +121,55 @@ public class QuartzController {
 		}
 	}
 	
+	@RequestMapping("jobAll")
+	public void showAllJob(HttpServletResponse response) throws SchedulerException {
+		JSONObject json = new JSONObject();
+		List<ScheduleJob> jobList = jobTaskService.getAllJob();
+		if (jobList != null && jobList.size() > 0) {
+			for (int i = 0; i < jobList.size(); i++) {
+				System.out.println("第" + (i + 1) + "个的任务：" + jobList.get(i));
+			}
+		}
+		
+		if (jobList != null) {
+			logger.info("***********************一共有" + jobList.size() + "个任务***********************");
+		} else {
+			logger.info("***********************没有任务！***********************");
+		}
+		json.put("code", "success");
+		json.put("message", "查询成功");
+		WriterUtil.write(response, json.toString());
+	}
+	
+	@RequestMapping("running")
+	public void showAllRunningJob(HttpServletResponse response) throws SchedulerException {
+		JSONObject json = new JSONObject();
+		List<ScheduleJob> runningJobList = jobTaskService.getRunningJob();
+		if (runningJobList != null && runningJobList.size() > 0) {
+			for (int i = 0; i < runningJobList.size(); i++) {
+				System.out.println("#######第" + (i + 1) + "个执行的任务：" + runningJobList.get(i));
+			}
+		}
+		
+		if (runningJobList != null) {
+			logger.info("***********************已经启动了" + runningJobList.size() + "个任务***********************");
+		} else {
+			logger.info("***********************没有任务启动！***********************");
+		}
+		json.put("code", "success");
+		json.put("message", "查询成功");
+		WriterUtil.write(response, json.toString());
+	}
+	
+	@RequestMapping("jobDelete")
+	public void jobDelete(HttpServletResponse response, ScheduleJob scheduleJob) throws SchedulerException {
+		JSONObject json = new JSONObject();
+		ScheduleJob scheduleJob1 = jobTaskService.getTaskById("1001");
+		jobTaskService.deleteJob(scheduleJob1);
+		logger.info("***********************" + scheduleJob1.getJobId() + "删除成功***********************");
+		json.put("code", "success");
+		json.put("message", "删除" + scheduleJob1.getJobId() + "成功");
+		WriterUtil.write(response, json.toString());
+	}
 
 }

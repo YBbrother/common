@@ -15,7 +15,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 		<!--必须，QuartzScheduler 延时启动，应用启动完后 QuartzScheduler 再启动 -->
 		<property name="startupDelay" value="3"></property>
 		<!-- 设置自动启动 -->
-		<property name="autoStartup" value="true"></property>  
+		<property name="autoStartup" value="true"></property>
 		<property name="applicationContextSchedulerContextKey" value="applicationContext"></property>
 		<property name="configLocation" value="classpath:quartz.properties"></property>
 		<property name="dataSource" ref="dataSource"/>
