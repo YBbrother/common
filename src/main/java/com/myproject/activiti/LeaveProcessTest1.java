@@ -21,8 +21,6 @@ import org.activiti.engine.task.Task;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
-import com.myproject.system.model.Person;
-
 public class LeaveProcessTest1 {
 	
 	ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
@@ -311,10 +309,10 @@ public class LeaveProcessTest1 {
 		taskService.setVariable(task.getId(), "请假日期", new Date());
 		
 		// 变量中存放对象的前提是实现序列化
-		Person person = new Person();
+/*		Person person = new Person();
 		person.setId(1);
 		person.setName("老狼");
-		taskService.setVariable(task.getId(), "人员信息", person);
+		taskService.setVariable(task.getId(), "人员信息", person);*/
 	}
 	
 	/**

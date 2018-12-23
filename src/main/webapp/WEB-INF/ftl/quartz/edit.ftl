@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<#include "common/header.ftl">
+		<#include "include/header.ftl">
 	</head>
 	<body>
 		<form action="" id="editForm" >
@@ -56,38 +56,36 @@
 			      </tr>
 		    </table>
 	    </form>
-	</body>
-	
-	<script type="text/javascript">
-		
-		function doRevise() {
-			$.ajax({
-				cache : true,
-				type : "POST",
-				url : "/common/quartz/revise.do",
-				data : $('#editForm').serialize(),
-				dataType: "json",
-				async : false,
-				error : function(request) {
-					laryer.alert("Connection error");
-				},
-				success:function(data) {
-					if (data.code == "success") {
-						layer.msg(data.message, {icon:1,time:500}, function(){doClose();});
-						// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
-					} else {
-						layer.msg(data.message, {icon:2,time:500}, function(){doClose();});
+	    
+	   <script type="text/javascript">
+			function doRevise() {
+				$.ajax({
+					cache : true,
+					type : "POST",
+					url : "/common/quartz/revise.do",
+					data : $('#editForm').serialize(),
+					dataType: "json",
+					async : false,
+					error : function(request) {
+						laryer.alert("Connection error");
+					},
+					success:function(data) {
+						if (data.code == "success") {
+							layer.msg(data.message, {icon:1,time:500}, function(){doClose();});
+							// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
+						} else {
+							layer.msg(data.message, {icon:2,time:500}, function(){doClose();});
+						}
 					}
-				}
-			});
-		}
+				});
+			}
+			
+			function doClose() {
+				window.parent.location.reload(); //刷新父页面
+				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+				parent.layer.close(index);
+			}
+		</script>
 		
-		function doClose() {
-			window.parent.location.reload(); //刷新父页面
-			var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-			parent.layer.close(index);
-		}
-		
-	</script>
-	
+	</body>
 </html>

@@ -1,11 +1,8 @@
 package common;
 
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.alibaba.fastjson.JSONArray;
 
 import net.sf.json.JSONObject;
 

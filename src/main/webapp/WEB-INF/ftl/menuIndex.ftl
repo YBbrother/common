@@ -39,6 +39,45 @@
 							</h3>
 						</div>
 					</li>
+					 <li><a href="#"> 
+                   <i class="fa fa-bars">
+                   </i>
+                    <span class="nav-label">基础管理</span>
+                     <span class="fa arrow"></span>
+                   </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a class="J_menuItem" href="/common/dict">数据字典</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="/common/sysFile">文件管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#"> 
+                   <i class="fa fa-desktop">
+                   </i>
+                    <span class="nav-label">系统管理</span>
+                     <span class="fa arrow"></span>
+                   </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a class="J_menuItem" href="quartz/list.do">用户商户管理</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="sys/user/">用户管理</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="sys/role">角色管理</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="sys/menu/">系统菜单</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="/system/sysDept">部门管理</a>
+                        </li>
+                    </ul>
+                </li>
 					
 				</ul>
 			</div>

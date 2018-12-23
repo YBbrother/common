@@ -16,7 +16,7 @@
 			-->
 		</style>
 		<!-- 引入静态资源文件 -->
-		<#include "common/header.ftl">
+		<#include "include/header.ftl">
 	</head>
  
 	<body>
@@ -62,148 +62,145 @@
 	      	</tr>
 	      </#list>
 	    </table>
-	</body>
-	
-	<script type="text/javascript">
+	    
+	    <script type="text/javascript">
+			var prefix = "/common/quartz";
+			function addTask() {
+				// layer.msg('hello');
+				layer.open({
+				  type: 2,
+				  title: '增加任务',
+				  maxmin: true,
+				  area: ['380px', '70%'],
+				  content : prefix + '/addTask.do'  // url
+				}); 
+			}
 			
-		var prefix = "/common/quartz";
-		
-		function addTask() {
-			// layer.msg('hello');
-			layer.open({
-			  type: 2,
-			  title: '增加任务',
-			  maxmin: true,
-			  area: ['380px', '70%'],
-			  content : prefix + '/addTask.do'  // url
-			}); 
-		}
-		
-		function edit(tid) {
-			var id = $(tid).parent().parent().find("td:eq(0)").text();
-			layer.open({
-			  type: 2,
-			  title: '修改任务',
-			  maxmin: true,
-			  area: ['380px', '70%'],
-			  content : prefix + '/edit.do?id=' + id  // url
-			});
-		}
-		
-		function remove(tid) {
-			var jobId = $(tid).parent().parent().find("td:eq(0)").text();
-			layer.confirm('确定要删除选中的记录？', {
-				btn : [ '确定', '取消' ]
-			}, function() {
-				$.ajax({
-					url : prefix + '/remove.do',
-					type : "post",
-					data : {
-						'jobId' : jobId
-					},
-					dataType: "json",
-					success:function(data) {
-						if (data.code == "success") {
-							layer.msg(data.message, {icon:1,time:500}, function(){ window.parent.location.reload(); });
-							// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
-						} else {
-							layer.msg(data.message, {icon:2,time:500}, function(){ window.parent.location.reload(); });
-						}
-					}
+			function edit(tid) {
+				var id = $(tid).parent().parent().find("td:eq(0)").text();
+				layer.open({
+				  type: 2,
+				  title: '修改任务',
+				  maxmin: true,
+				  area: ['380px', '70%'],
+				  content : prefix + '/edit.do?id=' + id  // url
 				});
-			})
-		}
-		
-		function start() {
-			var jobId = '1001';
-			layer.confirm('确定启动吗？', {
-				btn : [ '确定', '取消' ]
-			}, function() {
-				$.ajax({
-					url : prefix + '/startJob.do',
-					type : "post",
-					data : {
-						'jobId' : jobId
-					},
-					dataType: "json",
-					success:function(data) {
-						if (data.code == "success") {
-							layer.msg(data.message, {icon:1,time:500});
-							// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
-						} else {
-							layer.msg(data.message, {icon:2,time:500});
+			}
+			
+			function remove(tid) {
+				var jobId = $(tid).parent().parent().find("td:eq(0)").text();
+				layer.confirm('确定要删除选中的记录？', {
+					btn : [ '确定', '取消' ]
+				}, function() {
+					$.ajax({
+						url : prefix + '/remove.do',
+						type : "post",
+						data : {
+							'jobId' : jobId
+						},
+						dataType: "json",
+						success:function(data) {
+							if (data.code == "success") {
+								layer.msg(data.message, {icon:1,time:500}, function(){ window.parent.location.reload(); });
+								// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
+							} else {
+								layer.msg(data.message, {icon:2,time:500}, function(){ window.parent.location.reload(); });
+							}
 						}
-					}
-				});
-			})
-		}
-		
-		function deleteJob() {
-			var jobId = '1001';
-			layer.confirm('确定删除吗？', {
-				btn : [ '确定', '取消' ]
-			}, function() {
-				$.ajax({
-					url : prefix + '/jobDelete.do',
-					type : "post",
-					data : {
-						'jobId' : jobId
-					},
-					dataType: "json",
-					success:function(data) {
-						if (data.code == "success") {
-							layer.msg(data.message, {icon:1,time:500});
-							// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
-						} else {
-							layer.msg(data.message, {icon:2,time:500});
+					});
+				})
+			}
+			
+			function start() {
+				var jobId = '1001';
+				layer.confirm('确定启动吗？', {
+					btn : [ '确定', '取消' ]
+				}, function() {
+					$.ajax({
+						url : prefix + '/startJob.do',
+						type : "post",
+						data : {
+							'jobId' : jobId
+						},
+						dataType: "json",
+						success:function(data) {
+							if (data.code == "success") {
+								layer.msg(data.message, {icon:1,time:500});
+								// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
+							} else {
+								layer.msg(data.message, {icon:2,time:500});
+							}
 						}
-					}
-				});
-			})
-		}
-		
-		function getAll() {
-			var jobId = '1001';
-			layer.confirm('确定启动吗？', {
-				btn : [ '确定', '取消' ]
-			}, function() {
-				$.ajax({
-					url : prefix + '/jobAll.do',
-					type : "post",
-					dataType: "json",
-					success:function(data) {
-						if (data.code == "success") {
-							layer.msg(data.message, {icon:1,time:500});
-							// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
-						} else {
-							layer.msg(data.message, {icon:2,time:500});
+					});
+				})
+			}
+			
+			function deleteJob() {
+				var jobId = '1001';
+				layer.confirm('确定删除吗？', {
+					btn : [ '确定', '取消' ]
+				}, function() {
+					$.ajax({
+						url : prefix + '/jobDelete.do',
+						type : "post",
+						data : {
+							'jobId' : jobId
+						},
+						dataType: "json",
+						success:function(data) {
+							if (data.code == "success") {
+								layer.msg(data.message, {icon:1,time:500});
+								// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
+							} else {
+								layer.msg(data.message, {icon:2,time:500});
+							}
 						}
-					}
-				});
-			})
-		}
-		
-		function getRuning() {
-			var jobId = '1001';
-			layer.confirm('确定启动吗？', {
-				btn : [ '确定', '取消' ]
-			}, function() {
-				$.ajax({
-					url : prefix + '/running.do',
-					type : "post",
-					dataType: "json",
-					success:function(data) {
-						if (data.code == "success") {
-							layer.msg(data.message, {icon:1,time:500});
-							// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
-						} else {
-							layer.msg(data.message, {icon:2,time:500});
+					});
+				})
+			}
+			
+			function getAll() {
+				var jobId = '1001';
+				layer.confirm('确定启动吗？', {
+					btn : [ '确定', '取消' ]
+				}, function() {
+					$.ajax({
+						url : prefix + '/jobAll.do',
+						type : "post",
+						dataType: "json",
+						success:function(data) {
+							if (data.code == "success") {
+								layer.msg(data.message, {icon:1,time:500});
+								// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
+							} else {
+								layer.msg(data.message, {icon:2,time:500});
+							}
 						}
-					}
-				});
-			})
-		}
-		
-	</script>
-
+					});
+				})
+			}
+			
+			function getRuning() {
+				var jobId = '1001';
+				layer.confirm('确定启动吗？', {
+					btn : [ '确定', '取消' ]
+				}, function() {
+					$.ajax({
+						url : prefix + '/running.do',
+						type : "post",
+						dataType: "json",
+						success:function(data) {
+							if (data.code == "success") {
+								layer.msg(data.message, {icon:1,time:500});
+								// layer.msg('提示信息', 图标类型, 自动关闭时间, msg关闭后执行的回调)
+							} else {
+								layer.msg(data.message, {icon:2,time:500});
+							}
+						}
+					});
+				})
+			}
+		</script>
+	
+	</body>
 </html>

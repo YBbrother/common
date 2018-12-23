@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myproject.system.dao.MenuDao">
+	
+	<select id="selectPermsByUserId" parameterType="Integer" resultType="String">
+		SELECT
+			smi.perms 
+		FROM
+			sys_user_role sur,
+			sys_role_menu srm,
+			sys_menu_info smi 
+		WHERE
+			smi.menu_id = srm.menu_id 
+			AND sur.role_id = srm.role_id 
+			AND sur.user_id = #{userId}
+	</select>
+	
+</mapper>

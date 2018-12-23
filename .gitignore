@@ -8,4 +8,4 @@ target/
 .project
 .classpath
 
-src/main/resources/jdbc.properties
+src/main/java/com/myproject/utils

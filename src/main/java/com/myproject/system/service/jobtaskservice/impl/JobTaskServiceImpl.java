@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
+import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
@@ -19,8 +20,6 @@ import org.quartz.impl.matchers.GroupMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 
@@ -114,7 +113,7 @@ public class JobTaskServiceImpl implements JobTaskService {
 		CronTrigger cronTrigger = (CronTrigger) scheduler.getTrigger(triggerKey);
 		// 不存在，创建一个
 		if (cronTrigger == null) {
-			Class clazz = JobUtils.CONCURRENT_IS.equals(scheduleJob.getIsConcurrent()) ? QuartzJobFactory.class : QuartzJobFactoryDisallowConcurrentExecution.class;
+			Class<? extends Job> clazz = JobUtils.CONCURRENT_IS.equals(scheduleJob.getIsConcurrent()) ? QuartzJobFactory.class : QuartzJobFactoryDisallowConcurrentExecution.class;
 			JobDetail jobDetail = JobBuilder.newJob(clazz).withIdentity(scheduleJob.getJobName(), scheduleJob.getJobGroup()).build();
 			jobDetail.getJobDataMap().put("scheduleJob", scheduleJob);
 			CronScheduleBuilder schedBuilder = CronScheduleBuilder.cronSchedule(scheduleJob.getCronExpression());
